@@ -73,14 +73,14 @@ COPY README.md ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir \
-    torch>=2.0.0 \
-    torchaudio>=2.0.0 \
+    "torch>=2.0.0" \
+    "torchaudio>=2.0.0" \
     --index-url https://download.pytorch.org/whl/cu121
 
 # Install the main package dependencies
 RUN pip install --no-cache-dir \
-    transformers>=4.40.0 \
-    accelerate>=1.0.0 \
+    "transformers>=4.40.0" \
+    "accelerate>=1.0.0" \
     librosa \
     soundfile \
     pydub \
@@ -91,10 +91,10 @@ RUN pip install --no-cache-dir \
 
 # Install FastAPI and server dependencies
 RUN pip install --no-cache-dir \
-    fastapi>=0.109.0 \
-    uvicorn[standard]>=0.27.0 \
+    "fastapi>=0.109.0" \
+    "uvicorn[standard]>=0.27.0" \
     python-multipart \
-    pydantic>=2.0.0 \
+    "pydantic>=2.0.0" \
     inflect \
     aiofiles
 
@@ -157,17 +157,17 @@ COPY README.md ./
 
 # Install base dependencies first
 RUN pip install --no-cache-dir \
-    torch>=2.0.0 \
-    torchaudio>=2.0.0 \
+    "torch>=2.0.0" \
+    "torchaudio>=2.0.0" \
     --index-url https://download.pytorch.org/whl/cu121
 
 # Install vLLM (this may take a while)
-RUN pip install --no-cache-dir vllm>=0.4.0
+RUN pip install --no-cache-dir "vllm>=0.4.0"
 
 # Install the main package dependencies
 RUN pip install --no-cache-dir \
-    transformers>=4.40.0 \
-    accelerate>=1.0.0 \
+    "transformers>=4.40.0" \
+    "accelerate>=1.0.0" \
     librosa \
     soundfile \
     pydub \
@@ -178,10 +178,10 @@ RUN pip install --no-cache-dir \
 
 # Install FastAPI and server dependencies
 RUN pip install --no-cache-dir \
-    fastapi>=0.109.0 \
-    uvicorn[standard]>=0.27.0 \
+    "fastapi>=0.109.0" \
+    "uvicorn[standard]>=0.27.0" \
     python-multipart \
-    pydantic>=2.0.0 \
+    "pydantic>=2.0.0" \
     inflect \
     aiofiles
 
@@ -256,14 +256,14 @@ COPY pyproject.toml README.md ./
 # Install PyTorch (CPU version)
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir \
-    torch>=2.0.0 \
-    torchaudio>=2.0.0 \
+    "torch>=2.0.0" \
+    "torchaudio>=2.0.0" \
     --index-url https://download.pytorch.org/whl/cpu
 
 # Install Python dependencies
 RUN pip install --no-cache-dir \
-    transformers>=4.40.0 \
-    accelerate>=1.0.0 \
+    "transformers>=4.40.0" \
+    "accelerate>=1.0.0" \
     librosa \
     soundfile \
     pydub \
@@ -271,10 +271,10 @@ RUN pip install --no-cache-dir \
     scipy \
     einops \
     onnxruntime \
-    fastapi>=0.109.0 \
-    uvicorn[standard]>=0.27.0 \
+    "fastapi>=0.109.0" \
+    "uvicorn[standard]>=0.27.0" \
     python-multipart \
-    pydantic>=2.0.0 \
+    "pydantic>=2.0.0" \
     inflect \
     aiofiles
 
