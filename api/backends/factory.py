@@ -42,7 +42,7 @@ def get_backend() -> TTSBackend:
     
     # Read configuration from environment variables directly to support testing
     backend_type = os.getenv("TTS_BACKEND", "official").lower()
-    model_name = os.getenv("TTS_MODEL_NAME", os.getenv("TTS_MODEL_ID", "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"))
+    model_name = os.getenv("TTS_MODEL_NAME", os.getenv("TTS_MODEL_ID", "Qwen/Qwen3-TTS-12Hz-1.7B-Base"))
     
     # Device and dtype settings
     device = os.getenv("TTS_DEVICE", "auto")
@@ -72,7 +72,7 @@ def get_backend() -> TTSBackend:
         if model_name:
             _backend_instance = OfficialQwen3TTSBackend(model_name=model_name)
         else:
-            # Use default CustomVoice model
+            # Use default Base model
             _backend_instance = OfficialQwen3TTSBackend()
         
         logger.info(f"Using official Qwen3-TTS backend with model: {_backend_instance.get_model_id()}")
@@ -82,9 +82,9 @@ def get_backend() -> TTSBackend:
         if model_name:
             _backend_instance = VLLMOmniQwen3TTSBackend(model_name=model_name)
         else:
-            # Use 1.7B model for best quality/speed tradeoff
+            # Use default Base model
             _backend_instance = VLLMOmniQwen3TTSBackend(
-                model_name="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"
+                model_name="Qwen/Qwen3-TTS-12Hz-1.7B-Base"
             )
         
         logger.info(f"Using vLLM-Omni backend with model: {_backend_instance.get_model_id()}")

@@ -403,7 +403,9 @@ class TestOfficialGenerateCustomVoice:
 class TestGetSupportedVoicesIncludesCustom:
 
     def test_custom_voices_appended(self):
-        backend = OfficialQwen3TTSBackend()
+        backend = OfficialQwen3TTSBackend(
+            model_name="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"
+        )
         backend._custom_voices = {"MyClone": "fake_prompt"}
 
         voices = backend.get_supported_voices()

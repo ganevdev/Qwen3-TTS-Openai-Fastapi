@@ -43,7 +43,7 @@ class VLLMOmniQwen3TTSBackend(TTSBackend):
     
     def __init__(
         self, 
-        model_name: str = "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+        model_name: str = "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
         stage_configs_path: Optional[str] = None,
         enable_stats: bool = False,
         stage_init_timeout_s: int = 300,
@@ -56,9 +56,9 @@ class VLLMOmniQwen3TTSBackend(TTSBackend):
         Args:
             model_name: HuggingFace model identifier
                 Options:
-                - Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (recommended)
+                - Qwen/Qwen3-TTS-12Hz-1.7B-Base (default)
+                - Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
                 - Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign
-                - Qwen/Qwen3-TTS-12Hz-1.7B-Base
                 - Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice
             stage_configs_path: Optional path to stage configs
             enable_stats: Whether to log statistics

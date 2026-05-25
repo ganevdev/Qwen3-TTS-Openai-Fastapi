@@ -58,6 +58,13 @@ router = APIRouter(
 )
 
 
+def _schema_to_dict(schema):
+    """Support both Pydantic v1 and v2 response serialization APIs."""
+    if hasattr(schema, "model_dump"):
+        return schema.model_dump()
+    return schema.dict()
+
+
 # Language code to language name mapping
 LANGUAGE_CODE_MAPPING = {
     "en": "English",
@@ -684,7 +691,7 @@ async def list_models():
     """List all available TTS models."""
     return {
         "object": "list",
-        "data": [model.model_dump() for model in AVAILABLE_MODELS],
+        "data": [_schema_to_dict(model) for model in AVAILABLE_MODELS],
     }
 
 
@@ -693,7 +700,7 @@ async def get_model(model_id: str):
     """Get information about a specific model."""
     for model in AVAILABLE_MODELS:
         if model.id == model_id:
-            return model.model_dump()
+            return _schema_to_dict(model)
     
     raise HTTPException(
         status_code=404,
@@ -751,11 +758,11 @@ async def list_voices():
                     clone_name = name.strip()
                     clone_id = f"clone:{clone_name}"
                     clone_voices.append(
-                        VoiceInfo(
+                        _schema_to_dict(VoiceInfo(
                             id=clone_id,
                             name=clone_id,
                             description=f"Voice library profile: {clone_name}",
-                        ).model_dump()
+                        ))
                     )
                 elif ref_audio_filename:
                     logger.warning(
@@ -788,13 +795,13 @@ async def list_voices():
                     language=languages[0] if languages else "Auto",
                     description=description,
                 )
-                voices.append(voice_info.model_dump())
+                voices.append(_schema_to_dict(voice_info))
         else:
-            voices = [v.model_dump() for v in default_voices]
+            voices = [_schema_to_dict(v) for v in default_voices]
         
         # OpenAI aliases map to built-in speakers; skip them on Base models
         if backend.get_model_type() != "base":
-            voices += [v.model_dump() for v in openai_voices]
+            voices += [_schema_to_dict(v) for v in openai_voices]
 
         return {
             "voices": voices + clone_voices,
@@ -806,8 +813,8 @@ async def list_voices():
         # Return default voices if backend is not loaded
         return {
             "voices": (
-                [v.model_dump() for v in default_voices]
-                + [v.model_dump() for v in openai_voices]
+                [_schema_to_dict(v) for v in default_voices]
+                + [_schema_to_dict(v) for v in openai_voices]
                 + clone_voices
             ),
             "languages": default_languages,

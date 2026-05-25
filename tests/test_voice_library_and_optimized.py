@@ -267,6 +267,15 @@ class TestOptimizedBackendSelection:
         backend = OptimizedQwen3TTSBackend()
         assert backend.is_ready() is False
 
+    def test_optimized_backend_default_model_is_base(self, tmp_path, monkeypatch):
+        """OptimizedQwen3TTSBackend falls back to the 1.7B Base model key."""
+        pytest.importorskip("torch")
+        from api.backends.optimized_backend import OptimizedQwen3TTSBackend
+
+        monkeypatch.setenv("TTS_CONFIG", str(tmp_path / "missing-config.yaml"))
+        backend = OptimizedQwen3TTSBackend()
+        assert backend._default_model_key() == "1.7B-Base"
+
     def test_optimized_backend_loads_config_yaml(self, tmp_path, monkeypatch):
         """OptimizedQwen3TTSBackend reads config.yaml when it exists."""
         pytest.importorskip("torch")

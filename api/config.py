@@ -23,12 +23,12 @@ Options: 'official', 'vllm', 'pytorch', 'openvino'
 - 'openvino': Experimental OpenVINO backend for Intel CPUs/NPUs
 """
 
-TTS_MODEL_ID = os.getenv("TTS_MODEL_ID", os.getenv("TTS_MODEL_NAME", "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"))
+TTS_MODEL_ID = os.getenv("TTS_MODEL_ID", os.getenv("TTS_MODEL_NAME", "Qwen/Qwen3-TTS-12Hz-1.7B-Base"))
 """
 Model identifier for HuggingFace.
 Examples: 
-- Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (default, voice design)
-- Qwen/Qwen3-TTS-12Hz-1.7B-Base (voice cloning support)
+- Qwen/Qwen3-TTS-12Hz-1.7B-Base (default, voice cloning support)
+- Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (preset voices and voice design)
 - Qwen/Qwen3-TTS-12Hz-0.6B-Base (smaller model for CPU)
 """
 

@@ -31,6 +31,15 @@ class TestBackendSelection:
         backend = get_backend()
         assert isinstance(backend, OfficialQwen3TTSBackend)
         assert backend.get_backend_name() == "official"
+
+    def test_default_model_is_base(self, monkeypatch):
+        """Test that the default model is the 1.7B Base model."""
+        monkeypatch.delenv("TTS_BACKEND", raising=False)
+        monkeypatch.delenv("TTS_MODEL_NAME", raising=False)
+        monkeypatch.delenv("TTS_MODEL_ID", raising=False)
+
+        backend = get_backend()
+        assert backend.get_model_id() == "Qwen/Qwen3-TTS-12Hz-1.7B-Base"
     
     def test_official_backend_via_env(self, monkeypatch):
         """Test selecting official backend via environment variable."""
@@ -122,7 +131,7 @@ class TestBackendInterface:
     
     def test_backends_return_voices(self):
         """Test that backends return voice lists."""
-        official = OfficialQwen3TTSBackend()
+        official = OfficialQwen3TTSBackend(model_name="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice")
         vllm = VLLMOmniQwen3TTSBackend()
         
         # Both backends should return a list of voices
@@ -217,13 +226,13 @@ class TestVoiceCloningInterface:
         
         assert vllm.get_model_type() == "voicedesign"
 
-    def test_model_type_defaults_to_customvoice(self):
-        """Test that default model type is customvoice."""
+    def test_model_type_defaults_to_base(self):
+        """Test that default model type is base."""
         official = OfficialQwen3TTSBackend()
         vllm = VLLMOmniQwen3TTSBackend()
         
-        assert official.get_model_type() == "customvoice"
-        assert vllm.get_model_type() == "customvoice"
+        assert official.get_model_type() == "base"
+        assert vllm.get_model_type() == "base"
 
 
 class TestCPUBackendSelection:
@@ -376,4 +385,3 @@ class TestBackendErrorHandling:
         
         backend = get_backend()
         assert backend.get_model_id() == "custom/model"
-

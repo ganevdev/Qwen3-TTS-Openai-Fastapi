@@ -41,7 +41,7 @@ except ImportError:
 class OfficialQwen3TTSBackend(TTSBackend):
     """Official Qwen3-TTS backend using the qwen_tts package."""
     
-    def __init__(self, model_name: str = "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"):
+    def __init__(self, model_name: str = "Qwen/Qwen3-TTS-12Hz-1.7B-Base"):
         """
         Initialize the official backend.
         

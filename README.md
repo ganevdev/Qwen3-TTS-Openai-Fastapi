@@ -239,7 +239,7 @@ The `optimized` backend (`TTS_BACKEND=optimized`) delivers the best performance 
 
 2. Edit `config.yaml` to point to your local model paths:
    ```yaml
-   default_model: 0.6B-CustomVoice
+   default_model: 1.7B-Base
    models:
      0.6B-CustomVoice:
        hf_id: /path/to/Qwen3-TTS-12Hz-0.6B-CustomVoice
@@ -351,7 +351,7 @@ The server will start on `http://0.0.0.0:8880` by default.
 - `WORKERS` - Number of workers (default: `1`)
 - `CORS_ORIGINS` - CORS origins (default: `*`)
 - `TTS_BACKEND` - Backend engine: `optimized`, `official`, `vllm_omni`, `pytorch`, `openvino` (default: `official`)
-- `TTS_MODEL_NAME` - Override default model (optional; not used by the `optimized` backend)
+- `TTS_MODEL_NAME` - Model to load (default: `Qwen/Qwen3-TTS-12Hz-1.7B-Base`; not used by the `optimized` backend)
 - `TTS_WARMUP_ON_START` - Warm up backend on startup with 3 staged requests: `true` or `false` (default: `false`)
 - `TTS_MAX_CONCURRENT` - Max concurrent synthesis requests handled per API process (default: `1`)
 - `TTS_CONFIG` - Path to the YAML config file (default: `~/qwen3-tts/config.yaml`, optimized backend only)

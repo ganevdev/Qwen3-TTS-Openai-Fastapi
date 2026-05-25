@@ -52,7 +52,7 @@ class OptimizedQwen3TTSBackend(TTSBackend):
 
     Config file (~/qwen3-tts/config.yaml) example::
 
-        default_model: 0.6B-CustomVoice
+        default_model: 1.7B-Base
         models:
           0.6B-CustomVoice:
             hf_id: Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice
@@ -84,7 +84,7 @@ class OptimizedQwen3TTSBackend(TTSBackend):
     # ------------------------------------------------------------------
 
     def _default_model_key(self) -> str:
-        return self.config.get("default_model", "0.6B-CustomVoice")
+        return self.config.get("default_model", "1.7B-Base")
 
     def _base_model_key(self) -> str:
         """Return the first Base model key from config, falling back to '0.6B-Base'."""

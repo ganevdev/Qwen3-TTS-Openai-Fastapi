@@ -58,8 +58,8 @@ Configure the backend using environment variables:
 # Select backend (required)
 export TTS_BACKEND=vllm_omni
 
-# Optional: Override model (default: Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice)
-export TTS_MODEL_NAME=Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice
+# Optional: Override model (default: Qwen/Qwen3-TTS-12Hz-1.7B-Base)
+export TTS_MODEL_NAME=Qwen/Qwen3-TTS-12Hz-1.7B-Base
 
 # Optional: Enable warmup on startup (recommended)
 export TTS_WARMUP_ON_START=true
@@ -314,7 +314,7 @@ docker run -d \
   -p 8880:8880 \
   -e TTS_BACKEND=vllm_omni \
   -e TTS_WARMUP_ON_START=true \
-  -e TTS_MODEL_NAME=Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice \
+  -e TTS_MODEL_NAME=Qwen/Qwen3-TTS-12Hz-1.7B-Base \
   -v ~/.cache/huggingface:/home/appuser/.cache/huggingface \
   qwen3-tts:vllm
 ```
